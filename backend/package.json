@@ -1,0 +1,23 @@
+{
+  "type": "commonjs",
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "dev": "nodemon dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^4.11.0",
+    "nodemon": "^2.0.21"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "prisma": "^4.11.0",
+    "ts-node": "^10.9.1"
+  }
+}
