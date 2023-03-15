@@ -1,10 +1,25 @@
-import { PrismaClient } from  "@prisma/client";
+import { PrismaClient } from  "../node_modules/.prisma/client";
+import { buildSchema } from 'type-graphql';
+import "reflect-metadata"
+import { PostResolver } from "./Resolvers/post-resolver";
+import { ApolloServer } from "apollo-server-express";
+import express from "express";
 
-const client = new PrismaClient();
+export const client = new PrismaClient();
 
 const main = async() => {
-    const posts = await client.post.findMany();
-    console.log(posts);
+    const schema = await buildSchema({
+        resolvers: [PostResolver]
+    });
+
+    const server = new ApolloServer({ schema });
+    const app = express();
+    await server.start();
+    server.applyMiddleware({ app });
+
+    app.listen(4000, () => {
+        console.log("listening to requests on port 4000")
+    })
 }
 
 main().then(
@@ -14,3 +29,7 @@ main().then(
     await client.$disconnect();
     process.exit(1);
 })
+
+
+
+
