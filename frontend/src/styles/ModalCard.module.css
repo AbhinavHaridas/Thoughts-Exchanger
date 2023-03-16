@@ -1,0 +1,32 @@
+.modal {
+    position: fixed;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 20vmin; 
+    width: 100vmin;
+    height: 50vmin;
+    transition: .5 s;
+}
+
+.modal > * {
+    margin-left: 5vmin;
+}
+
+.modalDescription {
+    margin-top: 5vmin;
+}
+
+.modalButton {
+    width: 10vmin;
+    height: 7vmin;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    box-shadow:  rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    cursor: pointer;
+}

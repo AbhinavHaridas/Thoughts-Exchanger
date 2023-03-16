@@ -17,17 +17,26 @@ const client_1 = require("../node_modules/.prisma/client");
 const type_graphql_1 = require("type-graphql");
 require("reflect-metadata");
 const post_resolver_1 = require("./Resolvers/post-resolver");
+const cors_1 = __importDefault(require("cors"));
 const apollo_server_express_1 = require("apollo-server-express");
+const apollo_server_core_1 = require("apollo-server-core");
 const express_1 = __importDefault(require("express"));
 exports.client = new client_1.PrismaClient();
+const corsOption = {
+    origin: "http://localhost:3000",
+    credentials: true
+};
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const schema = yield (0, type_graphql_1.buildSchema)({
-        resolvers: [post_resolver_1.PostResolver]
+        resolvers: [post_resolver_1.PostResolver],
     });
-    const server = new apollo_server_express_1.ApolloServer({ schema });
+    const server = new apollo_server_express_1.ApolloServer({ schema,
+        plugins: [(0, apollo_server_core_1.ApolloServerPluginLandingPageLocalDefault)({ embed: true })]
+    });
     const app = (0, express_1.default)();
+    app.use((0, cors_1.default)(corsOption));
     yield server.start();
-    server.applyMiddleware({ app });
+    server.applyMiddleware({ app, cors: false });
     app.listen(4000, () => {
         console.log("listening to requests on port 4000");
     });

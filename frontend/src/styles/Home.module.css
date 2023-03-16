@@ -1,0 +1,16 @@
+.cardSection {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  gap: 4vmin; 
+  margin-top: 3vmin; 
+}
+
+.blurBackground {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+}

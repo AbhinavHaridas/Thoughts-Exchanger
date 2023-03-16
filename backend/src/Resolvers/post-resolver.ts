@@ -4,11 +4,20 @@ import { client } from '../index';
 
 @ObjectType()
 class Post {
-    @Field(() => String)
-    title!: string
+    @Field(() => Number)
+    id!: number;
+
+    @Field(() => Date)
+    createdAt!: Date; 
+    
+    @Field(() => Date)
+    updatedAt!: Date; 
 
     @Field(() => String)
-    description!: string | null
+    title!: string;
+
+    @Field(() => String)
+    description!: string | null;
 }
 
 @Resolver()
@@ -19,6 +28,18 @@ export class PostResolver {
         return posts;
     }
 
+    @Query(() => Post)
+    async getSpecificPost(
+        @Arg ("id", () => Number) id: number
+    ): Promise<Post | null> {
+        const post = await client.post.findFirst({
+            where: {
+                id
+            }
+        })
+        return post;
+    }
+
     @Mutation(() => Post)
     async createPost(
         @Arg("title", () => String) title: string,
@@ -27,8 +48,8 @@ export class PostResolver {
        const post = await client.post.create({
         data: {
             title,
-            description
-        }
+            description,
+        },
        }); 
        return post;
     }

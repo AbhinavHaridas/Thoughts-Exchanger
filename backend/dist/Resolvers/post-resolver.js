@@ -28,11 +28,23 @@ const index_1 = require("../index");
 let Post = class Post {
 };
 __decorate([
+    (0, decorators_1.Field)(() => Number),
+    __metadata("design:type", Number)
+], Post.prototype, "id", void 0);
+__decorate([
+    (0, decorators_1.Field)(() => Date),
+    __metadata("design:type", Date)
+], Post.prototype, "createdAt", void 0);
+__decorate([
+    (0, decorators_1.Field)(() => Date),
+    __metadata("design:type", Date)
+], Post.prototype, "updatedAt", void 0);
+__decorate([
     (0, decorators_1.Field)(() => String),
     __metadata("design:type", String)
 ], Post.prototype, "title", void 0);
 __decorate([
-    (0, decorators_1.Field)(() => String, { nullable: true }),
+    (0, decorators_1.Field)(() => String),
     __metadata("design:type", Object)
 ], Post.prototype, "description", void 0);
 Post = __decorate([
@@ -45,13 +57,23 @@ let PostResolver = class PostResolver {
             return posts;
         });
     }
+    getSpecificPost(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const post = yield index_1.client.post.findFirst({
+                where: {
+                    id
+                }
+            });
+            return post;
+        });
+    }
     createPost(title, description) {
         return __awaiter(this, void 0, void 0, function* () {
             const post = yield index_1.client.post.create({
                 data: {
                     title,
-                    description
-                }
+                    description,
+                },
             });
             return post;
         });
@@ -63,6 +85,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], PostResolver.prototype, "getAllPosts", null);
+__decorate([
+    (0, decorators_1.Query)(() => Post),
+    __param(0, (0, decorators_1.Arg)("id", () => Number)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], PostResolver.prototype, "getSpecificPost", null);
 __decorate([
     (0, decorators_1.Mutation)(() => Post),
     __param(0, (0, decorators_1.Arg)("title", () => String)),
