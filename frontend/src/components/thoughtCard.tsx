@@ -9,7 +9,7 @@ export default function ThoughtCard(
         description: string
         postId: number
     }) {
-    
+
     return (
         <div className={styles.card} onClick={() => {
             props.setShow(true)
@@ -17,7 +17,7 @@ export default function ThoughtCard(
         }
         }>
             <div className={styles.inside}>
-                <h1 className={styles.title}>{props.title}</h1>
+                <h3 className={styles.title}>{props.title}</h3>
                 <p className={styles.description}>
                     {props.description}
                 </p>

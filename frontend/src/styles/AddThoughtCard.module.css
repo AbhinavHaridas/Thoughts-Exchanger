@@ -1,0 +1,19 @@
+.modal {
+    position: fixed;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 10vmin; 
+    width: 100vmin;
+    height: 80vmin;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form > * {
+    margin: 2vh;
+}

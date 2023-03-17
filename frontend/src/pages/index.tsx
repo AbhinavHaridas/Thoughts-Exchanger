@@ -4,10 +4,16 @@ import styles from '@/styles/Home.module.css'
 import { useState } from 'react';
 import { getAllPosts } from '@/queries/postQueries';
 import { useQuery } from 'urql';
+import AddButton from '@/components/addButton';
+import AddThoughtCard from '@/components/addThoughtCard';
 
 export default function Home() {
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
   const [currentPostId, setCurrentPostId] = useState(0);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+   
 
   const [result, executeQuery] = useQuery({
     query: getAllPosts,
@@ -46,7 +52,27 @@ export default function Home() {
           )
         }
 
-      </div>
+        {
+          show2 && (
+            <>
+              <div className={styles.blurBackground} />
+              <AddThoughtCard 
+              show2={show2} 
+              setShow2={setShow2} 
+              title={title} 
+              setTitle={setTitle}
+              description={description} 
+              setDescription={setDescription} 
+               />
+            </>
+          )
+        }
+
+        </div>
+
+        <div className={styles.footer}>
+          <AddButton show2={show2} setShow2={setShow2} />
+        </div>      
     </>
   )
 }

@@ -12,7 +12,7 @@ export default function ModalCard(
     if (!props.show) return null;
 
 
-    const [result, executeQuery] = useQuery(
+    const [result, reExecuteQuery] = useQuery(
         {
             query: getSpecificPost(props.postId)
         }

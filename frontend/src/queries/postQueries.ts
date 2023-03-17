@@ -18,3 +18,12 @@ export const getSpecificPost = (id: number) => {
         }
     `
 } 
+
+export const createPost =  `
+       mutation($description: String!, $title: String!) {
+            createPost(description: $description, title: $title) {
+                title,
+                description    
+            }
+        } 
+    `

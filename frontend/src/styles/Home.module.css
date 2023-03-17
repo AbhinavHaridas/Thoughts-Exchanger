@@ -14,3 +14,10 @@
   height: 100%;
   backdrop-filter: blur(4px);
 }
+
+.footer {
+  align-self: end;
+  display: flex;
+  flex-direction: row;
+  margin-top: 40vmin; 
+}

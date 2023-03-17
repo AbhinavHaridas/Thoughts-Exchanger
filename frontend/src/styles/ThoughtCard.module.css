@@ -1,6 +1,6 @@
 .card {
     width: 50vmin;
-    height: 16vmin;
+    height: 10vmin;
     border-radius: 3vmin;
     background-color: rgb(179, 169, 169);
     transition: 0.3s;
