@@ -30,7 +30,7 @@ export default function ModalCard(
                 <hr />
                 <p className={styles.modalDescription}>{data['getSpecificPost']['description']}</p>
             </div>
-            <div className={styles.modalButton} onClick={() => props.setShow(false)}>Close</div>
+            <div className={styles.modalButton} onClick={() => props.setShow(false)}><p>Close</p></div>
         </div>
     )
 }

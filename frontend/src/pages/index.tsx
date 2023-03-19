@@ -6,6 +6,7 @@ import { getAllPosts } from '@/queries/postQueries';
 import { useQuery } from 'urql';
 import AddButton from '@/components/addButton';
 import AddThoughtCard from '@/components/addThoughtCard';
+import NavBar from '@/components/navBar';
 
 export default function Home() {
   const [show, setShow] = useState(false);
@@ -13,13 +14,13 @@ export default function Home() {
   const [currentPostId, setCurrentPostId] = useState(0);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-   
+
 
   const [result, executeQuery] = useQuery({
     query: getAllPosts,
   });
 
-  const { data, fetching, error }   = result;
+  const { data, fetching, error } = result;
 
   if (fetching) return <p>Loading....</p>
   if (error) return <p>Oh no....{error.message} </p>
@@ -28,51 +29,52 @@ export default function Home() {
 
   return (
     <>
-      <div className={styles.cardSection}>
+      <div className={styles.page}>
+        <NavBar />
+        <div className={styles.cardSection}>
+          {
+            data['getAllPosts'].map((post: any) => {
+              return (
+                <ThoughtCard title={post['title']}
+                  description={post['description']}
+                  setShow={setShow}
+                  postId={post['id']}
+                  createdAt={post['createdAt']}
+                  setCurrentPostId={setCurrentPostId}
+                />
+              )
+            })
+          }
 
-        {
-          data['getAllPosts'].map((post: any) => {
-            return (
-              <ThoughtCard title={post['title']} 
-                description={post['description']} 
-                setShow={setShow} 
-                postId={post['id']}
-                setCurrentPostId={setCurrentPostId} 
-              />
-            ) 
-          })
-        }
+          {
+            show && (
+              <>
+                <div className={styles.blurBackground} />
+                <ModalCard show={show} postId={currentPostId} setShow={setShow} />
+              </>
+            )
+          }
 
-        {
-          show && (
-            <>
-              <div className={styles.blurBackground} />
-              <ModalCard show={show} postId={currentPostId} setShow={setShow} />
-            </>
-          )
-        }
-
-        {
-          show2 && (
-            <>
-              <div className={styles.blurBackground} />
-              <AddThoughtCard 
-              show2={show2} 
-              setShow2={setShow2} 
-              title={title} 
-              setTitle={setTitle}
-              description={description} 
-              setDescription={setDescription} 
-               />
-            </>
-          )
-        }
-
+          {
+            show2 && (
+              <>
+                <div className={styles.blurBackground} />
+                <AddThoughtCard
+                  show2={show2}
+                  setShow2={setShow2}
+                  title={title}
+                  setTitle={setTitle}
+                  description={description}
+                  setDescription={setDescription}
+                />
+              </>
+            )
+          }
         </div>
-
-        <div className={styles.footer}>
-          <AddButton show2={show2} setShow2={setShow2} />
-        </div>      
+      </div>
+      <div className={styles.footer}>
+        <AddButton show2={show2} setShow2={setShow2} />
+      </div>
     </>
   )
 }

@@ -44,7 +44,8 @@ export class PostResolver {
     async createPost(
         @Arg("title", () => String) title: string,
         @Arg("description", () => String) description: string
-    ): Promise<Post> {
+    ): Promise<Post | null> {
+       if (title === "") return null;
        const post = await client.post.create({
         data: {
             title,
@@ -52,5 +53,21 @@ export class PostResolver {
         },
        }); 
        return post;
+    }
+
+    @Mutation(() => Post)
+    async removePost(
+        @Arg("id", () => Number) id: number 
+    ): Promise<void> {
+        await client.post.delete({
+            where: {
+                id
+            }
+        }) 
+    }
+
+    @Mutation(() => Post)
+    async removeAllPost(): Promise<void> {
+        await client.post.deleteMany();
     }
 }

@@ -13,6 +13,7 @@
   width: 100%;
   height: 100%;
   backdrop-filter: blur(4px);
+  overflow: hidden;
 }
 
 .footer {
@@ -20,4 +21,14 @@
   display: flex;
   flex-direction: row;
   margin-top: 40vmin; 
+}
+
+.page {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.page > .cardSection {
+  margin-left: 60vmin;
 }

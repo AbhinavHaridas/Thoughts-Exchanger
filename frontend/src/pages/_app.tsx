@@ -6,7 +6,7 @@ import { Provider } from 'urql';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider value={graphQLClient}>
-      <Component {...pageProps} />
+        <Component {...pageProps} />
     </Provider>
     );
 }

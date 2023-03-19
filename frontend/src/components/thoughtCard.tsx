@@ -7,7 +7,8 @@ export default function ThoughtCard(
         setCurrentPostId: Dispatch<SetStateAction<number>>,  
         title: string,
         description: string
-        postId: number
+        postId: number,
+        createdAt: number
     }) {
 
     return (
@@ -21,6 +22,11 @@ export default function ThoughtCard(
                 <p className={styles.description}>
                     {props.description}
                 </p>
+                 .... 
+            </div>
+            <hr />
+            <div className={styles.footer}>
+                <p className={styles.createdAt}><b>created At</b>:   {props.createdAt}</p>
             </div>
         </div>
     )

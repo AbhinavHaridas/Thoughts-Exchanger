@@ -69,6 +69,8 @@ let PostResolver = class PostResolver {
     }
     createPost(title, description) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (title === "")
+                return null;
             const post = yield index_1.client.post.create({
                 data: {
                     title,
@@ -76,6 +78,20 @@ let PostResolver = class PostResolver {
                 },
             });
             return post;
+        });
+    }
+    removePost(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield index_1.client.post.delete({
+                where: {
+                    id
+                }
+            });
+        });
+    }
+    removeAllPost() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield index_1.client.post.deleteMany();
         });
     }
 };
@@ -100,6 +116,19 @@ __decorate([
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], PostResolver.prototype, "createPost", null);
+__decorate([
+    (0, decorators_1.Mutation)(() => Post),
+    __param(0, (0, decorators_1.Arg)("id", () => Number)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], PostResolver.prototype, "removePost", null);
+__decorate([
+    (0, decorators_1.Mutation)(() => Post),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], PostResolver.prototype, "removeAllPost", null);
 PostResolver = __decorate([
     (0, type_graphql_1.Resolver)()
 ], PostResolver);

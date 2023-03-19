@@ -3,7 +3,8 @@ export const getAllPosts = `
         getAllPosts {
             id,
             title,
-            description
+            description,
+            createdAt
         }
     }
 `;
