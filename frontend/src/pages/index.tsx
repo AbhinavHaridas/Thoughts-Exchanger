@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { getAllPosts } from '@/queries/postQueries';
 import { useQuery } from 'urql';
 import AddButton from '@/components/addButton';
-import AddThoughtCard from '@/components/addThoughtCard';
+import AddThoughtCard from '@/components/form';
 import NavBar from '@/components/navBar';
 
 export default function Home() {

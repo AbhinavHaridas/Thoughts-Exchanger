@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import styles from '@/styles/AddThoughtCard.module.css'
+import styles from '@/styles/Form.module.css'
 import { useMutation } from 'urql';
 import { createPost } from '@/queries/postQueries';
 
-export default function AddThoughtCard(props: {
+export default function Form(props: {
     show2: boolean,
     setShow2: Dispatch<SetStateAction<boolean>>,
     title: string,
@@ -25,24 +25,27 @@ export default function AddThoughtCard(props: {
         <div className={styles.modal}>
             <div className={styles.modalContent}>
                 <div className={styles.close} onClick={() => props.setShow2(false)}>
-                        <svg className="feather feather-x" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+                    <svg className="feather feather-x" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="18" x2="6" y1="6" y2="18" /><line x1="6" x2="18" y1="6" y2="18" /></svg>
                 </div>
                 <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-                    <label className={styles.label}>Enter title: </label><input type='text' className={styles.textTitle}
-                        onChange={(e) => props.setTitle(e.target.value)} />
-                    <label className={styles.label}>Enter description: </label>
-                    <textarea
-                        rows={20}
-                        cols={40}
-                        className={styles.textDescription}
-                        onChange={(e) => props.setDescription(e.target.value)} />
-                    <button className={styles.submit} onClick={() => {
+                    <div className={styles.fields}>
+                        <label className={styles.label}><b>Enter title: </b></label>
+                        <input type='text' className={styles.textTitle}
+                            onChange={(e) => props.setTitle(e.target.value)} />
+                            <br />
+                        <label className={styles.label}><b>Enter description:</b></label>
+                        <textarea
+                            rows={10}
+                            className={styles.textDescription}
+                            onChange={(e) => props.setDescription(e.target.value)} />
+                    </div>
+                    <div className={styles.submit} onClick={() => {
                         handleMutation(
                             props.title,
                             props.description
                         );
                         props.setShow2(false)
-                    }}>submit</button>
+                    }}>submit</div>
                 </form>
             </div>
         </div>
