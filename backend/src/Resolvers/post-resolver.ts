@@ -1,9 +1,12 @@
 import { Resolver } from 'type-graphql';
 import { Arg, Field, Mutation, ObjectType, Query } from 'type-graphql/dist/decorators';
 import { client } from '../index';
+import { User } from './user-resolver';
 
+
+// POST OBJECT
 @ObjectType()
-class Post {
+export class Post {
     @Field(() => Number)
     id!: number;
 
@@ -18,43 +21,56 @@ class Post {
 
     @Field(() => String)
     description!: string | null;
+
+    // @Field(() => User)
+    // user?: User
+
+    // @Field(() => Number)
+    // userId!: number
 }
+
 
 @Resolver()
 export class PostResolver {
+    // GET ALL POSTS
     @Query(() => [Post])
     async getAllPosts(): Promise<Post[]> {
-        const posts = await client.post.findMany();
-        return posts;
+        const POSTS = await client.post.findMany();
+        return POSTS;
     }
 
-    @Query(() => Post)
+    // GET POST
+    @Query(() => Post, { nullable: true })
     async getSpecificPost(
         @Arg ("id", () => Number) id: number
     ): Promise<Post | null> {
-        const post = await client.post.findFirst({
+        const POST = await client.post.findFirst({
             where: {
                 id
             }
         })
-        return post;
+        return POST;
     }
 
-    @Mutation(() => Post)
+    // CREATE POST
+    @Mutation(() => Post, { nullable: true })
     async createPost(
         @Arg("title", () => String) title: string,
-        @Arg("description", () => String) description: string
+        @Arg("description", () => String) description: string,
     ): Promise<Post | null> {
        if (title === "") return null;
-       const post = await client.post.create({
+       const POST = await client.post.create({
         data: {
             title,
             description,
+            // user: undefined,
+            // userId: 0 
         },
        }); 
-       return post;
+       return POST;
     }
 
+    // REMOVE POST
     @Mutation(() => Post)
     async removePost(
         @Arg("id", () => Number) id: number 
@@ -66,6 +82,7 @@ export class PostResolver {
         }) 
     }
 
+    // REMOVE ALL POSTS
     @Mutation(() => Post)
     async removeAllPost(): Promise<void> {
         await client.post.deleteMany();
