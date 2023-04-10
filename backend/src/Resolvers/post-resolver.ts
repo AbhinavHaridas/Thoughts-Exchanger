@@ -70,6 +70,23 @@ export class PostResolver {
        return POST;
     }
 
+    // EDIT POST 
+    @Mutation(() => Post, { nullable: true })
+    async updatePost(
+        @Arg("id", () => Number) id: number,
+        @Arg("description", () => String) description: string 
+    ): Promise<Post | null> {
+        const post = client.post.update({
+            where: {
+                id
+            },
+            data: {
+                description
+            }
+        });
+        return post;
+    }
+
     // REMOVE POST
     @Mutation(() => Post)
     async removePost(

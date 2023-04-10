@@ -64,6 +64,18 @@ let PostResolver = class PostResolver {
         });
         return POST;
     }
+    // EDIT POST 
+    async updatePost(id, description) {
+        const post = index_1.client.post.update({
+            where: {
+                id
+            },
+            data: {
+                description
+            }
+        });
+        return post;
+    }
     // REMOVE POST
     async removePost(id) {
         await index_1.client.post.delete({
@@ -89,6 +101,11 @@ __decorate([
     __param(0, (0, decorators_1.Arg)("title", () => String)),
     __param(1, (0, decorators_1.Arg)("description", () => String))
 ], PostResolver.prototype, "createPost", null);
+__decorate([
+    (0, decorators_1.Mutation)(() => Post, { nullable: true }),
+    __param(0, (0, decorators_1.Arg)("id", () => Number)),
+    __param(1, (0, decorators_1.Arg)("description", () => String))
+], PostResolver.prototype, "updatePost", null);
 __decorate([
     (0, decorators_1.Mutation)(() => Post),
     __param(0, (0, decorators_1.Arg)("id", () => Number))
