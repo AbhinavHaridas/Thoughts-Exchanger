@@ -30,7 +30,6 @@ export default function Home() {
   return (
     <>
       <div className={styles.page}>
-        <NavBar />
         <div className={styles.cardSection}>
           {
             data['getAllPosts'].map((post: any) => {
@@ -71,9 +70,9 @@ export default function Home() {
             )
           }
         </div>
-      </div>
-      <div className={styles.footer}>
-        <AddButton show2={show2} setShow2={setShow2} />
+        <div className={styles.footer}>
+          <AddButton show2={show2} setShow2={setShow2} />
+        </div>
       </div>
     </>
   )

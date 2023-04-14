@@ -12,6 +12,10 @@
 
 .navbar > * {
     transition: 0.5s;
+    color: white;
+}
+
+.navbar > Link > * {
     width: 100%;
     height: 5vmin;
     margin-top: 3vmin;
