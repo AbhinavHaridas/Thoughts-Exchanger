@@ -32,3 +32,10 @@
 .page > .cardSection {
   margin-left: 60vmin;
 }
+
+.title {
+  font-weight: 900;
+  color: #3b3838;
+  font-family: 'Pinyon Script', cursive;
+  font-size: 4rem;
+}

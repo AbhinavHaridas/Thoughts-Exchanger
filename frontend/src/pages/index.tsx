@@ -6,7 +6,7 @@ import { getAllPosts } from '@/queries/postQueries';
 import { useQuery } from 'urql';
 import AddButton from '@/components/addButton';
 import AddThoughtCard from '@/components/form';
-import NavBar from '@/components/navBar';
+import {motion, stagger} from "framer-motion";
 
 export default function Home() {
   const [show, setShow] = useState(false);
@@ -28,9 +28,13 @@ export default function Home() {
   console.log(data)
 
   return (
-    <>
       <div className={styles.page}>
         <div className={styles.cardSection}>
+          <motion.h1
+              initial={{ opacity: 0, x: -10, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className={styles.title}>Your Thoughts</motion.h1>
           {
             data['getAllPosts'].map((post: any) => {
               return (
@@ -74,6 +78,5 @@ export default function Home() {
           <AddButton show2={show2} setShow2={setShow2} />
         </div>
       </div>
-    </>
   )
 }
