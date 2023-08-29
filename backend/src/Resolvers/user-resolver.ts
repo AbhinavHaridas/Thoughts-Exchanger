@@ -87,7 +87,7 @@ export class UserResolver {
         if (!request || !request.session) {
            console.log("Session is not defined"); 
         }
-        // USER.password is the HASHED_PASSWORD and not the normal password 
+        // USER.password is the HASHED_PASSWORD are not the normal password 
         if (USER && await argon2.verify(USER.password, password)) {
             request.session.UID = USER.id; // Storing the USER.id in session (persisting that user has logged in session) 
             return USER; 
