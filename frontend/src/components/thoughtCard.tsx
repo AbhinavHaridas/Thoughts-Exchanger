@@ -2,15 +2,16 @@ import React, { Dispatch, SetStateAction } from 'react';
 import styles from '@/styles/ThoughtCard.module.css';
 import {motion} from "framer-motion";
 
-export default function ThoughtCard(
-    props: {
-        setShow: Dispatch<SetStateAction<boolean>>,
-        setCurrentPostId: Dispatch<SetStateAction<number>>,  
-        title: string,
-        description: string
-        postId: number,
-        createdAt: number
-    }) {
+interface Props {
+    setShow: Dispatch<SetStateAction<boolean>>,
+    setCurrentPostId: Dispatch<SetStateAction<number>>,
+    title: string,
+    description: string
+    postId: number,
+    createdAt: number
+}
+
+const ThoughtCard: React.FC<Props> = (props) => {
 
     return (
         <motion.div
@@ -46,3 +47,5 @@ export default function ThoughtCard(
         </motion.div>
     )
 }
+
+export default ThoughtCard;

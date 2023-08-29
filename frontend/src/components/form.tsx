@@ -4,14 +4,16 @@ import { useMutation } from 'urql';
 import { createPost } from '@/queries/postQueries';
 import {motion} from 'framer-motion';
 
-export default function Form(props: {
+interface Props {
     show2: boolean,
     setShow2: Dispatch<SetStateAction<boolean>>,
     title: string,
     setTitle: Dispatch<SetStateAction<string>>,
     description: string,
     setDescription: Dispatch<SetStateAction<string>>
-}) {
+}
+
+export const AddThoughtCard: React.FC<Props> = (props) => {
     if (!props.show2) return null;
 
     const [_result, executeMutation] = useMutation(createPost)

@@ -1,8 +1,6 @@
 import { Resolver } from 'type-graphql';
 import { Arg, Field, Mutation, ObjectType, Query } from 'type-graphql/dist/decorators';
 import { client } from '../index';
-import { User } from './user-resolver';
-
 
 // POST OBJECT
 @ObjectType()
@@ -21,12 +19,6 @@ export class Post {
 
     @Field(() => String)
     description!: string | null;
-
-    // @Field(() => User)
-    // user?: User
-
-    // @Field(() => Number)
-    // userId!: number
 }
 
 
@@ -34,7 +26,7 @@ export class Post {
 export class PostResolver {
     // GET ALL POSTS
     @Query(() => [Post])
-    async getAllPosts(): Promise<Post[]> {
+    async getAllPosts(): Promise<Post[] | null> {
         const POSTS = await client.post.findMany();
         return POSTS;
     }
@@ -48,7 +40,7 @@ export class PostResolver {
             where: {
                 id
             }
-        })
+        });
         return POST;
     }
 
@@ -63,8 +55,6 @@ export class PostResolver {
         data: {
             title,
             description,
-            // user: undefined,
-            // userId: 0 
         },
        }); 
        return POST;

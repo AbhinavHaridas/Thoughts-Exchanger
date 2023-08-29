@@ -4,12 +4,13 @@ import { useQuery } from 'urql';
 import { getSpecificPost } from '@/queries/postQueries';
 import {motion} from "framer-motion";
 
-export default function ModalCard(
-    props: {
-        show: boolean,
-        setShow: Dispatch<SetStateAction<boolean>>,
-        postId: number
-    }) {
+interface Props {
+    show: boolean,
+    setShow: Dispatch<SetStateAction<boolean>>,
+    postId: number
+}
+
+const ModalCard: React.FC<Props> = (props) => {
     if (!props.show) return null;
 
 
@@ -41,3 +42,5 @@ export default function ModalCard(
         </motion.div>
     )
 }
+
+export default ModalCard;

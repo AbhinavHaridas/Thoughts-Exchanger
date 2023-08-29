@@ -3,7 +3,7 @@ import styles from '@/styles/NavBar.module.css';
 import Link from 'next/link';
 
 
-export default function NavBar() {
+const NavBar = () => {
   return (
     <div className={styles.navbar}>
       <Link href={'/login'}>
@@ -26,3 +26,5 @@ export default function NavBar() {
     </div>
   )
 }
+
+export default NavBar;

@@ -24,7 +24,8 @@ export default function Login() {
               duration: 0.2,
               ease: [1, 0.5, 0.8, 1]
             }}
-            className={styles.loginWindow}>
+            className={styles.loginWindow}
+        >
           <label className={styles.label}>Enter Username </label>
           <br />
           <br />

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { getAllPosts } from '@/queries/postQueries';
 import { useQuery } from 'urql';
 import AddButton from '@/components/addButton';
-import AddThoughtCard from '@/components/form';
+import {AddThoughtCard} from '@/components/form';
 import {motion, stagger} from "framer-motion";
 
 export default function Home() {

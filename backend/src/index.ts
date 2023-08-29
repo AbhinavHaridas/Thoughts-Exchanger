@@ -1,4 +1,4 @@
-import { PrismaClient } from  "../node_modules/.prisma/client";
+import { PrismaClient } from ".prisma/client";
 import { buildSchema } from 'type-graphql';
 import "reflect-metadata";
 import session from "express-session";
@@ -28,7 +28,7 @@ const main = async() => {
     });
     
     // REDIS SETUP
-    const redisClient = redis.createClient();
+    const redisClient = redis.createClient({ legacyMode: true }); // legacyMode is required for some reason
     const RedisStore = require('connect-redis')(session); // ERROR is coming here 
     // Running the redis client
     redisClient.connect();

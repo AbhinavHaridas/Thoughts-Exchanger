@@ -60,13 +60,12 @@ export class UserResolver {
         @Arg("email", () => String) email: string
     ): Promise<User> {
        const { username, password } = input;
-       const HASHED_PASSWORD = await argon2.hash(password); 
+       const HASHED_PASSWORD = await argon2.hash(password); // Storing only hashed password for security purposes
        const USERS = await client.user.create({
         data: {
             username,
             password: HASHED_PASSWORD,
             email,
-            // Post: undefined 
         }
        });
        return USERS;
@@ -84,7 +83,7 @@ export class UserResolver {
                 username,
             }
         });
-        // Checking if session or requestuest actually exists or not
+        // Checking if session or request actually exists or not
         if (!request || !request.session) {
            console.log("Session is not defined"); 
         }
